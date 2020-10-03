@@ -6,10 +6,11 @@
 
 using namespace std;
 
-  ll power(ll n,ll p,ll mo)
-  {
+ll exponentiation2(ll n,ll p,ll mo)
+{
 
     ll r=1; 
+
     while(p>0)
     {
 
@@ -18,9 +19,10 @@ using namespace std;
           r=(r * n)%mo;
 
           p--;
-       }
+      }
       else
       {
+        
        p=p/2;
 
        n=(n * n)%mo;
@@ -31,23 +33,24 @@ using namespace std;
 
     return r;
  
-   }
+  }
+  int main()
+  {
 
-  int main(){
+       int test;
 
-       int t;
+       cin>>test;
 
-       cin>>t;
-
-       while(t--)
+       while(test--)
       {
+
         ll a,b,r,res,c;
 
         cin>>a>>b>>c;
 
-         r=power(b,c,mod-1);
+         r=exponentiation2(b,c,mod-1);
 
-         res=power(a,r,mod);
+         res=exponentiation2(a,r,mod);
 
         cout<<res<<"\n";
 
