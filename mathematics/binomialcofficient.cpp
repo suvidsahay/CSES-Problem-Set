@@ -8,7 +8,9 @@
 using namespace std;
 
 ll fact[maxn];
+
 ll inv[maxn];
+
 ll exponentiation(ll n,ll p)
 {
 
@@ -41,25 +43,38 @@ ll exponentiation(ll n,ll p)
 ll cal_nck(ll n,ll k)
 {
   
+  ll res,r;
    if(n>=k)
-  return((fact[n]*inv[k])%mod*inv[n-k])%mod;
+   {
+
+   	r = ( fact[n]* inv[k] )%mod;
+
+   	res = (r * inv[n-k])%mod;
+
+    return res;
+
+   }
   
   return 0;
+
 }
 
 void factorial_andinversefactorial()
 {
 	fact[0]=1;
+
 	inv[0]=1;
+
 	 for(int i=1;i<maxn;i++)
      {
           
-      fact[i]=(i*fact[i-1])%mod;
+      fact[i] = (i * fact[i-1])%mod;
       
-      inv[i]=(exponentiation(fact[i],mod-2));
+      inv[i] = exponentiation( fact[i],mod-2 );
 
     }
-    
+
+
 }
 
 
@@ -82,6 +97,7 @@ int main()
      cout<<cal_nck(n,k)<<"\n";
 
   }   
+  
 
 }
 
