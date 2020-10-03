@@ -6,54 +6,34 @@
 
 using namespace std;
 
-ll exponentiation2(ll n,ll p,ll mo)
+ll exponentiation2(ll n, ll p, ll mo)
 {
-
-    ll r=1; 
-
-    while(p>0)
+    ll r = 1; 
+    while(p > 0)
     {
-
-      if(p&1)
+      if(p & 1)
       {
-          r=(r * n)%mo;
-
-          p--;
+         r = (r * n) % mo;
+         p--;
       }
       else
       {
-        
-       p=p/2;
-
-       n=(n * n)%mo;
-
-       }
-      
-     }
-
+         p = p / 2;
+         n = (n * n) % mo;
+      }
+    }
     return r;
- 
   }
-  int main()
-  {
-
-       int test;
-
-       cin>>test;
-
-       while(test--)
-      {
-
-        ll a,b,r,res,c;
-
-        cin>>a>>b>>c;
-
-         r=exponentiation2(b,c,mod-1);
-
-         res=exponentiation2(a,r,mod);
-
-        cout<<res<<"\n";
-
-       }
-
-  }
+int main()
+{
+   int test;
+   cin >> test;
+   while(test--)
+   {
+      ll a, b, r, res, c;
+      cin >> a >> b >> c;
+      r = exponentiation2(b, c, mod - 1);
+      res=exponentiation2(a, r, mod);
+      cout << res << "\n";
+   }
+}
