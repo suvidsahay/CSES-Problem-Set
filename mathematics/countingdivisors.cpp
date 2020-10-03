@@ -8,26 +8,25 @@
 using namespace std;
 
 int fact[maxn];
-void sieve()
+void num_offactors()
 {
   
   ll i,j;
-  for(i=1;i<maxn;i++)
+  for(i = 1;i < maxn; i++)
   {
 
-    for(j=i;j<maxn;j=j+i)
-    {
-        fact[j]++;
+      for(j=i;j<maxn;j = j + i)
+       {
 
-    }
-
-  }
+        fact[j]+= 1;
+       }
+   }
    
 return;
 }
 int main()
 {
-  sieve();
+  num_offactors();
  
   int query,n;
 
@@ -36,8 +35,9 @@ int main()
   while(query--)
   {
     cin>>n;
-    
+
     cout<<fact[n]<<"\n";
   }
 
 }
+
