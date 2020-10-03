@@ -11,84 +11,76 @@ ll fact[maxn];
 
 ll inv[maxn];
 
-ll exponentiation(ll n,ll p)
-{
+ll exponentiation(ll n,ll p){
 
     ll r=1; 
 
-    while(p>0)
-    {
+    while(p>0){
 
-      if(p&1)
-      {
+      if(p&1){
           r=(r * n)%mod;
 
           p--;
       }
-      else
-      {
+      else{
         
        p=p/2;
 
        n=(n * n)%mod;
 
-       }
+      }
       
-     }
+    }
 
     return r;
  
 }
 
-ll cal_nck(ll n,ll k)
-{
+ll cal_nck(ll n,ll k){
   
-  ll res,r;
-   if(n>=k)
-   {
+  ll res , r;
 
-   	r = ( fact[n]* inv[k] )%mod;
+   if(n>=k){
 
-   	res = (r * inv[n-k])%mod;
+   	    r = ( fact[n]* inv[k] )%mod;
 
-    return res;
+            res = (r * inv[n-k])%mod;
 
-   }
+            return res;
+
+      }
   
   return 0;
 
 }
 
-void factorial_andinversefactorial()
-{
+void factorial_andinversefactorial(){
+	
 	fact[0]=1;
 
 	inv[0]=1;
 
-	 for(int i=1;i<maxn;i++)
-     {
+	 for(int i=1;i<maxn;i++){
           
-      fact[i] = (i * fact[i-1])%mod;
+             fact[i] = (i * fact[i-1])%mod;
       
-      inv[i] = exponentiation( fact[i],mod-2 );
+             inv[i] = exponentiation( fact[i],mod-2 );
 
-    }
+           }
 
 
 }
 
 
-int main()
-{
+int main(){
 
- factorial_andinversefactorial();
+  factorial_andinversefactorial();
 
   int test;
 
   cin>>test;
 
-  while(test--)
-  {
+  while(test--){
 
      ll n,k;
 
@@ -96,8 +88,10 @@ int main()
 
      cout<<cal_nck(n,k)<<"\n";
 
-  }   
-  
+     }   
+
 
 }
+
+
 
