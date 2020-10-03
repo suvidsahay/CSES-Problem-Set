@@ -9,35 +9,28 @@ using namespace std;
 
 int fact[maxn];
 void num_offactors()
-{
-  
-  ll i,j;
-  for(i = 1;i < maxn; i++)
+{ 
+  ll i, j;
+  for(i = 1; i < maxn; i++)
   {
-
-      for(j=i;j<maxn;j = j + i)
+      for(j = i; j < maxn; j = j + i)
        {
-
-        fact[j]+= 1;
+        fact[j] += 1;
        }
    }
    
 return;
 }
+
 int main()
 {
   num_offactors();
- 
-  int query,n;
-
-  cin>>query;
-
+  int query, n;
+  cin >> query;
   while(query--)
   {
-    cin>>n;
-
-    cout<<fact[n]<<"\n";
+    cin >> n;
+    cout << fact[n] << "\n";
   }
-
 }
 
