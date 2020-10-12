@@ -1,62 +1,72 @@
-#include<bits/stdc++.h>
-
+#include <bits/stdc++.h>
+ 
+#define int long long
+#define MOD 1000000007
+#define MAX 1e13
+ 
 using namespace std;
-using ll = long long;
 
-typedef pair<ll, ll> p;
+vector<array<int, 3>> roads;
+int n, m;
+bool visited[100005];
+int parent[100005];
 
+int find(int x) {
+    if(parent[x] == x) {
+        return x;
+    }
+    return parent[x] = find(parent[x]);
+}
+
+void union_find(int x, int y) {
+    int x_par = find(x);
+    int y_par = find(y);
+    if(x_par != y_par) {
+        parent[x_par] = y_par;
+    }
+}
+
+int MST() {
+    for(int i = 0; i < n; i++) {
+        parent[i] = i;
+        visited[i] = false;
+    }
+    sort(roads.begin(), roads.end());
+    int cost = 0;
+    for(int i = 0; i < roads.size(); i++) {
+        if(find(roads[i][1]) != find(roads[i][2])) {
+            cost += roads[i][0];
+            union_find(roads[i][1], roads[i][2]);
+        }
+    }
+    int count = 0;
+    for(int i = 0; i < n; i++) {
+        if(parent[i] == i) {
+            count++;
+        }
+    }
+    if(count > 1) {
+        return -1;
+    }
+    return cost;
+}
+ 
 void solve() {
-    ll n, m;
     cin >> n >> m;
-    vector<p> adj[n+1];
-    ll x, y, z;
-    for(int i=0; i<m; i++) {
-        cin >> x >> y >> z;
-        adj[x].push_back({y,z});
-        adj[y].push_back({x,z});
+    for(int i = 0; i < m; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        a--; b--;
+        roads.push_back({c, a, b});
     }
-    priority_queue<p, vector<p>, greater<p>> pq;
-    vector<bool> vis(n+1, false);
-    vector<ll> par(n+1, -1);
-    vector<ll> key(n+1, 1e18);
-    pq.push({0, 1});
-    key[1] = 0;
-
-    while(!pq.empty()) {
-        int t = pq.top().second;
-        vis[t] = true;
-        pq.pop();
-
-        for(int i=0; i<adj[t].size(); i++) {
-
-            int u = adj[t][i].first;
-            int w = adj[t][i].second;
-
-            if(!vis[u] && key[u] > w) {
-                key[u] = w;
-                pq.push({w, u});
-                par[u] = t;
-            }
-        }
-    }
-    ll sum = 0;
-    bool f = 0;
-    for(int i=1; i<=n; i++) {
-        if(key[i] == 1e18) {
-            f = 1;
-            break;
-        }
-        sum += key[i];
-    }
-    if(f) {
+    int res = MST();
+    if(res == -1) {
         cout << "IMPOSSIBLE" << endl;
     }
-    else {
-        cout << sum << endl;
-    }
-
+    else cout << res << endl;
 }
-int main() {
+ 
+int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     solve();
